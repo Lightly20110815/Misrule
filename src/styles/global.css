@@ -29,6 +29,24 @@
   --space-2xl: 5rem;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: #e8e6e1;
+    --color-text-secondary: #a8a8a0;
+    --color-text-tertiary: #777;
+    --color-bg: #111110;
+    --color-surface: #1a1a18;
+    --color-border: #2a2a28;
+    --color-link: #e8e6e1;
+    --color-link-hover: #aaa;
+    --color-code-bg: #1e1e1c;
+  }
+
+  ::selection {
+    background-color: #3a3a38;
+  }
+}
+
 *,
 *::before,
 *::after {
