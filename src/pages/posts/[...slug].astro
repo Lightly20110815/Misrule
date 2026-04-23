@@ -16,12 +16,13 @@ const { Content } = await render(post);
 
 const postUrl = new URL(`/posts/${post.id}`, Astro.site).href;
 
-const jsonLd = {
+const jsonLd: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": post.data.title,
   "description": post.data.description,
   "datePublished": post.data.date.toISOString(),
+  "dateModified": (post.data.updated ?? post.data.date).toISOString(),
   "url": postUrl,
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -42,7 +43,7 @@ const jsonLd = {
 
 <Layout title={`${post.data.title} — Misrule`} description={post.data.description} ogType="article">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  <Article title={post.data.title} date={post.data.date} description={post.data.description}>
+  <Article title={post.data.title} date={post.data.date} description={post.data.description} updated={post.data.updated}>
     <Content />
   </Article>
 </Layout>

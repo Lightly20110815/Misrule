@@ -19,8 +19,21 @@ const posts = (await getCollection("posts")).sort(
   <section class="home">
     <header class="home-header">
       <Heading as="h1">Misrule</Heading>
-      <p class="home-tagline">愿我们纵然置身当下，仍能寻得清醒。</p>
+      <p class="home-tagline" id="greeting">愿我们纵然置身当下，仍能寻得清醒。</p>
     </header>
+    <script>
+      const greetings = [
+        { start: 0, end: 5, text: "夜深了，慢慢读。" },
+        { start: 5, end: 11, text: "一日之计在于晨。" },
+        { start: 11, end: 13, text: "中午好。" },
+        { start: 13, end: 18, text: "午后适合阅读。" },
+      ];
+      const hour = new Date().getHours();
+      const greeting = greetings.find((g) => hour >= g.start && hour <= g.end);
+      if (greeting) {
+        document.getElementById("greeting").textContent = greeting.text;
+      }
+    </script>
     <ul class="post-list">
       {
         posts.map((post) => {

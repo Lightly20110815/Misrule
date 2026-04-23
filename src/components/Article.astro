@@ -6,15 +6,24 @@ interface Props {
   title: string;
   date: Date;
   description: string;
+  updated?: Date;
 }
 
-const { title, date, description } = Astro.props;
+const { title, date, description, updated } = Astro.props;
 
 const formattedDate = date.toLocaleDateString("zh-CN", {
   year: "numeric",
   month: "long",
   day: "numeric",
 });
+
+const formattedUpdated =
+  updated &&
+  updated.toLocaleDateString("zh-CN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 ---
 
 <article class="article">
@@ -22,6 +31,14 @@ const formattedDate = date.toLocaleDateString("zh-CN", {
     <Heading as="h1">{title}</Heading>
     <p class="article-meta">
       <time datetime={date.toISOString()}>{formattedDate}</time>
+      {updated && (
+        <>
+          <span class="article-meta-sep">·</span>
+          <time datetime={updated.toISOString()} class="article-updated">
+            更新于 {formattedUpdated}
+          </time>
+        </>
+      )}
     </p>
   </header>
   <Prose>
@@ -43,5 +60,14 @@ const formattedDate = date.toLocaleDateString("zh-CN", {
     font-size: 0.8125rem;
     color: var(--color-text-tertiary);
     margin-top: var(--space-sm);
+  }
+
+  .article-meta-sep {
+    margin: 0 0.4em;
+    color: var(--color-border);
+  }
+
+  .article-updated {
+    color: var(--color-text-tertiary);
   }
 </style>

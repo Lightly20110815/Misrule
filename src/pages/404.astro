@@ -1,0 +1,38 @@
+import Layout from "../components/Layout.astro";
+import Heading from "../components/Heading.astro";
+---
+
+<Layout title="404 — Misrule">
+  <section class="not-found">
+    <Heading as="h1">404</Heading>
+    <p class="not-found-message">找不到这个页面。</p>
+    <a href="/" class="not-found-link">回到首页</a>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    max-width: var(--width-content);
+    text-align: center;
+    padding: var(--space-2xl) 0;
+  }
+
+  .not-found-message {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin: var(--space-lg) 0;
+  }
+
+  .not-found-link {
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    color: var(--color-link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .not-found-link:hover {
+    color: var(--color-link-hover);
+  }
+</style>
