@@ -29,7 +29,7 @@ const posts = (await getCollection("posts")).sort(
         { start: 13, end: 18, text: "午后适合阅读。" },
       ];
       const hour = new Date().getHours();
-      const greeting = greetings.find((g) => hour >= g.start && hour <= g.end);
+      const greeting = greetings.find((g) => hour >= g.start && hour < g.end);
       if (greeting) {
         document.getElementById("greeting").textContent = greeting.text;
       }

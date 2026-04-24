@@ -79,13 +79,26 @@ import Heading from "../components/Heading.astro";
     for (const entry of results) {
       const li = document.createElement("li");
       li.className = "search-result-item";
-      li.innerHTML = `
-        <a href="/posts/${entry.slug}">
-          <span class="result-title">${entry.title}</span>
-          <span class="result-description">${entry.description}</span>
-          <time datetime="${entry.date}">${formatDate(entry.date)}</time>
-        </a>
-      `;
+
+      const a = document.createElement("a");
+      a.href = `/posts/${entry.slug}`;
+
+      const titleSpan = document.createElement("span");
+      titleSpan.className = "result-title";
+      titleSpan.textContent = entry.title;
+
+      const descSpan = document.createElement("span");
+      descSpan.className = "result-description";
+      descSpan.textContent = entry.description;
+
+      const time = document.createElement("time");
+      time.dateTime = entry.date;
+      time.textContent = formatDate(entry.date);
+
+      a.appendChild(titleSpan);
+      a.appendChild(descSpan);
+      a.appendChild(time);
+      li.appendChild(a);
       resultsList.appendChild(li);
     }
   }
